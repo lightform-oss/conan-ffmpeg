@@ -6,7 +6,7 @@ import shutil
 
 class FFMpegConan(ConanFile):
     name = "ffmpeg"
-    version = "4.2.1"
+    version = "4.4"
     url = "https://github.com/bincrafters/conan-ffmpeg"
     description = "A complete, cross-platform solution to record, convert and stream audio and video"
     # https://github.com/FFmpeg/FFmpeg/blob/master/LICENSE.md
@@ -55,35 +55,35 @@ class FFMpegConan(ConanFile):
                        'postproc': True,
                        'zlib': True,
                        'bzlib': True,
-                       'lzma': True,
-                       'iconv': True,
-                       'freetype': True,
-                       'openjpeg': True,
-                       'openh264': True,
-                       'opus': True,
-                       'vorbis': True,
+                       'lzma': False,
+                       'iconv': False,
+                       'freetype': False,
+                       'openjpeg': False,
+                       'openh264': False,
+                       'opus': False,
+                       'vorbis': False,
                        'zmq': False,
                        'sdl2': False,
                        'x264': True,
                        'x265': True,
-                       'vpx': True,
+                       'vpx': False,
                        'mp3lame': False,
-                       'fdk_aac': True,
+                       'fdk_aac': False,
                        'webp': True,
-                       'openssl': True,
-                       'alsa': True,
-                       'pulse': True,
+                       'openssl': False,
+                       'alsa': False,
+                       'pulse': False,
                        'vaapi': True,
-                       'vdpau': True,
-                       'xcb': True,
-                       'appkit': True,
+                       'vdpau': False,
+                       'xcb': False,
+                       'appkit': False,
                        'avfoundation': True,
                        'coreimage': True,
                        'audiotoolbox': True,
                        'videotoolbox': True,
                        'securetransport': False,  # conflicts with OpenSSL
                        "decoder_dxv": True,
-                       'qsv': True}
+                       'qsv': False}
     generators = "pkg_config"
     _source_subfolder = "source_subfolder"
 
@@ -98,7 +98,7 @@ class FFMpegConan(ConanFile):
     def source(self):
         source_url = "https://ffmpeg.org/releases/ffmpeg-%s.tar.bz2" % self.version
         tools.get(source_url,
-                  sha256="682a9fa3f6864d7f0dbf224f86b129e337bc60286e0d00dffcd710998d521624")
+                  sha256="42093549751b582cf0f338a21a3664f52e0a9fbe0d238d3c992005e493607d0e")
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
 
@@ -112,7 +112,7 @@ class FFMpegConan(ConanFile):
         if self.settings.os != "Linux":
             self.options.remove("vaapi")
             self.options.remove("vdpau")
-            self.options.remove("xcb")
+            #self.options.remove("xcb")
             self.options.remove("alsa")
             self.options.remove("pulse")
         if self.settings.os != "Macos":
@@ -349,6 +349,7 @@ class FFMpegConan(ConanFile):
                 self.cpp_info.frameworks.append('CoreImage')
             if self.options.audiotoolbox:
                 self.cpp_info.frameworks.append('AudioToolbox')
+                self.cpp_info.frameworks.append('CoreAudio')
             if self.options.videotoolbox:
                 self.cpp_info.frameworks.append('VideoToolbox')
             if self.options.securetransport:
