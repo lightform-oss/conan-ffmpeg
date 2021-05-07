@@ -140,11 +140,11 @@ class FFMpegConan(ConanFile):
         if self.options.bzlib:
             self.requires("bzip2/1.0.8")
         if self.options.lzma:
-            self.requires("xz_utils/5.2.4")
+            self.requires("xz_utils/5.2.5")
         if self.options.iconv:
             self.requires("libiconv/1.16")
         if self.options.freetype:
-            self.requires("freetype/2.10.2")
+            self.requires("freetype/2.10.4")
         if self.options.openjpeg:
             self.requires("openjpeg/2.3.1")
         if self.options.openh264:
@@ -160,7 +160,7 @@ class FFMpegConan(ConanFile):
         if self.options.x264:
             self.requires("libx264/20190605")
         if self.options.x265:
-            self.requires("libx265/3.2.1")
+            self.requires("libx265/3.4")
         if self.options.vpx:
             self.requires("libvpx/1.8.0@bincrafters/stable")
         if self.options.mp3lame:
@@ -170,7 +170,7 @@ class FFMpegConan(ConanFile):
         if self.options.webp:
             self.requires("libwebp/1.0.3")
         if self.options.openssl:
-            self.requires("openssl/1.1.1g")
+            self.requires("openssl/1.1.1h")
         if self.settings.os == "Windows":
             if self.options.qsv:
                 self.requires("intel_media_sdk/2018R2_1@bincrafters/stable")
